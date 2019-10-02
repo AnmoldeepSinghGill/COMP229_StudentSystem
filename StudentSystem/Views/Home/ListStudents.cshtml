@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewBag.Title = "List of Students";
+}
+
+    <p>The list of Students is:</p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Student Id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Course</th>
+                <th scope="col">Gpa</th>
+                <th scope="col">Full Time / Part Time</th>
+            </tr>
+        </thead>
+        @foreach (Student s in Model)
+        {
+        <tr>
+            <td>@s.FirstName</td>
+            <td>@s.LastName</td>
+            <td>@s.StudentId</td>
+            <td>@s.Email</td>
+            <td>
+                @s.CourseCode
+                
+                @{
+                    switch (s.CourseCode)
+                    {
+                        case "COMP229":
+                        @: - Web Application Development
+                        break;
+                    case "COMP100":
+                        @: - Programming I
+                        break;
+                    case "COMP123":
+                        @: - Programming II
+                        break;
+                    default:
+                        @: - Other Course
+                        break;
+                    }
+                }
+            </td>
+            <td>
+                @s.Gpa
+
+            @if (s.Gpa >= 2)
+            {
+                @: - Great GPA!
+            }
+            else
+            {
+                @: - Keep Working on Your GPA!
+            }
+            </td>
+        <td>@(s.FullTime ? "FullTime" : "PartTime")</td>
+        </tr>
+         }
+    </table>
+
